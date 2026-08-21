@@ -246,11 +246,10 @@ const ITEM_POOL = [
   { id:'mika',  name:"날개깃",  desc:'주기적으로 탄환을 소거하고 대미지를 입히는 유성우가 내립니다.', color:'#f4a', apply: p => { p.mikaTimer=0; p.mikaInterval=360; } },
   { id:'haruka', name:"화분",  desc:'맵 하단에 파괴시 적에게 피해를 입히는 화분을 생성합니다.',  color:'#8c4', apply: p => { p.harukaActive=true; } },
   { id:'hina',  name:"완장",    desc:'공격이 5발 발사되는 강력한 공격으로 변경됩니다.', color:'#88f', apply: p => { p.hinaMode=true; p.dmgPct+=0.5; p.reloadTime+=60; p.maxAmmo=Math.max(1,p.maxAmmo-2); p.bulletR+=4; } },
-  { id:'ako',   name:"목줄",    desc:'스테이지마다 50% 확률로 공격력 70% 증가', color:'#fa0', apply: p => { p.akoActive=true; } },
+  { id:'ako',   name:"코인토스",    desc:'스테이지마다 50% 확률로 공격력 70% 증가', color:'#fa0', apply: p => { p.akoActive=true; } },
   { id:'junko', name:"당고",    desc:'모든 회복량 -50%, 회피율 +40%, 이동속도 증가',   color:'#fc8', apply: p => { p.junko=true; p.healMult-=0.5; p.evasion+=40; p.spd+=0.5; } },
   { id:'chinatsu', name:"장갑", desc:'회복량+50%, 기본 회피율+15%', color:'#fda', apply: p => { p.healMult+=0.5; p.evasion+=15; } },
   { id:'hoshino', name:"방탄 방패", desc:'전방에 5회 방어시 5초 쿨타임의 방패를 생성합니다.', color:'#8cf', apply: p => { p.hoshinoShield=true; p.hoshinoBlocks=0; p.hoshinoCooldown=0; } },
-  { id:'someone_card', name:"누군가의 카드", desc:'카드 잔량에 따라 모든 스탯이 증가합니다.', color:'#fa0', apply: p => { p.someoneCard=true; } },
   { id:'saori', name:"도넛", desc:'주기적으로 지원사격을 해 도트 대미지를 입힙니다.', color:'#f88', apply: p => { p.saoriActive=true; p.saoriTimer=0; } },
   { id:'iroha', name:"양말", desc:'적 탄환·보스 이동속도 감소', color:'#8ff', apply: p => { p.irohaActive=true; } },
   { id:'yuuka_blackhole', name:"블랙홀",  desc:'주기적으로 탄환을 흡수하는 블랙홀을 생성합니다.',   color:'#80f', apply: p => { p.blackholeInterval=480; p.blackholeTimer=480; } },
@@ -261,8 +260,6 @@ const ITEM_POOL = [
     apply: p => { p.mineDash=true; } },
   { id:'sumire_sandbag', name:"모래주머니", desc:'이동속도가 0.5 감소합니다. 공격력이 100% 증가합니다. 최대 체력이 50% 증가합니다.', color:'#cc8844',
     apply: p => { p.spd=Math.max(1,p.spd-0.5); p.dmgPct+=1.0; p.maxHp=Math.round(p.maxHp*1.5); p.hp=Math.min(p.hp,p.maxHp); } },
-  { id:'kayoko_churu', name:"츄르", desc:'동물귀 학생에게 가하는 피해가 300% 증가합니다.', color:'#ffaa66',
-    apply: p => { p.kayokoChuru=true; } },
   { id:'eligma', name:"엘리그마", desc:'원하는 보스 아이템을 강화할 수 있습니다.', color:'#cc88ff',
     apply: p => { p.eligmaActive=true; } },
   { id:'shiroko_drone', name:"드론", desc:'플레이어 공격력의 25%를 가지는 드론을 2기 소환합니다.', color:'#4cf', apply: p => { p.shirokoDrone=true; } },
@@ -2533,7 +2530,7 @@ function startNextStage(){
   document.getElementById('reload-text').style.display='none';
   // 유즈의 보물상자 — 스테이지마다 랜덤 스탯 증가
   if(G.player.yuzuBox) applyYuzuBonus();
-  // 아코의 목줄 — 동전 던지기
+  // 코인토스 — 동전 던지기
   if(G.player.akoActive){
     G.player.akoBuff=Math.random()<0.5;
     const el=document.getElementById('pattern-text');
